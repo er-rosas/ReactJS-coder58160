@@ -1,15 +1,85 @@
 const products = [
     { 
         id: '1', 
-        name: 'iphone 12', 
-        price: 1000, 
-        category: 'celular', 
-        img:'https://itechstore.com.ar/wp-content/uploads/2020/06/iphone-12-pro-gold-hero-600x710.png', 
-        stock: 25, 
-        description:'Descripcion de Iphone 12'
+        name: 'Galaxy S23',
+        price: 1.649, 
+        category: 'samsung', 
+        img:'/products/samsung-prod-1.webp', 
+        stock: 10, 
+        description:'Descripcion del Iphone 15'
     },
-    { id: '2', name: 'samsung s21', price: 800, category: 'celular', img:'https://images.samsung.com/is/image/samsung/p6pim/ar/galaxy-s21/gallery/ar-galaxy-s21-5g-g991-sm-g991bzalaro-thumb-368338803', stock: 16, description:'Descripcion de Samsung s21'},
-    { id: '3', name: 'Ipad 8va generacion', price: 1200, category: 'tablet', img:'https://medias.musimundo.com/medias/00406046-143516-143516-01-143516-01.jpg-size515?context=bWFzdGVyfGltYWdlc3w1MjI1MnxpbWFnZS9qcGVnfGhjMC9oYWMvMTAyODM0OTc0NTU2NDYvMDA0MDYwNDYtMTQzNTE2LTE0MzUxNl8wMS0xNDM1MTZfMDEuanBnX3NpemU1MTV8MzA0NmMzNGFhZjUwMDY2YjY5MjU0MjlkMGJlYWMxODAxZjE5ODJhZmJlOTczZThmZjE2NTQxMjU5NjE2OTA4Yw', stock: 0, description:'Descripcion de Ipad'}
+    { 
+        id: '2',
+        name: 'Galaxy Z Flip5', 
+        price: 1099, 
+        category: 'samsung', 
+        img:'/products/samsung-prod-2.webp', 
+        stock: 10, 
+        description:'Descripcion del Galaxy Z Flip5'
+    },
+    { 
+        id: '3', 
+        name: 'Galaxy Tab S9 FE', 
+        price: 2999, 
+        category: 'samsung', 
+        img:'/products/samsung-prod-3.webp', 
+        stock: 10, 
+        description:'Descripcion del Galaxy Tab S9 FE'
+    },
+    { 
+        id: '4', 
+        name: 'iPhone 15',
+        price: 1649, 
+        category: 'apple', 
+        img:'/products/apple-prod-1.webp', 
+        stock: 10, 
+        description:'Descripcion del Iphone 15'
+    },
+    { 
+        id: '5',
+        name: 'AirPods Pro', 
+        price: 389, 
+        category: 'apple', 
+        img:'/products/apple-prod-2.webp', 
+        stock: 10, 
+        description:'Descripcion de los AirPods Pro'
+    },
+    { 
+        id: '6', 
+        name: 'MacBook Pro 16"', 
+        price: 2999, 
+        category: 'apple', 
+        img:'/products/apple-prod-3.webp', 
+        stock: 10, 
+        description:'Descripcion del MacBook Pro 16"'
+    },
+    { 
+        id: '7', 
+        name: 'Xiaomi 13 Pro',
+        price: 536, 
+        category: 'xiaomi', 
+        img:'/products/xiaomi-prod-1.webp', 
+        stock: 10, 
+        description:'Descripcion del Xiaomi 13 Pro'
+    },
+    { 
+        id: '8',
+        name: 'Xiaomi Redmi Note 12', 
+        price: 275, 
+        category: 'xiaomi', 
+        img:'/products/xiaomi-prod-2.webp', 
+        stock: 10, 
+        description:'Descripcion del Xiaomi Redmi Note 12'
+    },
+    { 
+        id: '9', 
+        name: 'Xiaomi Redmi Buds 4', 
+        price: 25, 
+        category: 'xiaomi', 
+        img:'/products/xiaomi-prod-3.webp', 
+        stock: 10, 
+        description:'Descripcion de los Xiaomi Redmi Buds 4 Active'
+    }
 ]
 
 export const getProducts = () => {
@@ -17,5 +87,21 @@ export const getProducts = () => {
         setTimeout(() => {
             resolve(products)
         }, 1000)
+    })
+}
+
+export const getProductById = (productId) => {
+    return new Promise ((resolve) => {
+        setTimeout(() => {
+            resolve(products.find(prod => prod.id === productId))
+        }, 500)
+    })
+}
+
+export const getProductsByCategory = (categoryId) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(products.filter(prod => prod.category === categoryId))
+        }, 500)
     })
 }

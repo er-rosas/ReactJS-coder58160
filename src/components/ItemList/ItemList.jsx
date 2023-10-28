@@ -1,8 +1,9 @@
+import classes from './ItemList.module.css'
 import Item from "../Item/Item.jsx"
 
 const ItemList = ({ products }) => {
     return (
-        <div>
+        <div className={`${classes.productContainer}`}>
             {
                 products.map(prod => {
                     return (

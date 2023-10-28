@@ -1,0 +1,51 @@
+.counter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.controls {
+    display: flex;
+}
+
+.button {
+    font-size: 1vw;
+    background-color: white;
+    border: solid #090909 0.1vw;
+    color: #000000;
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 0.5vw;
+    margin-top: 0.5vw;
+    margin-bottom: 1vw;
+}
+
+.button:hover{
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.number {
+    font-weight: 400;
+    font-size: 2vw;
+    padding: 0 0.5vw;
+}
+
+.buttonAddCart {
+    font-size: 1vw;
+    background-color: white;
+    border: solid #090909 0.1vw;
+    color: #000000;
+    width: 10vw;
+    height: 2.5vw;
+    border-radius: 0.5vw;
+    margin-top: 0.5vw;
+    margin-bottom: 1vw;
+}
+
+.buttonAddCart:hover{
+    background-color: #1a1a1a;
+    color: #ffffff;
+}

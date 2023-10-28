@@ -1,0 +1,26 @@
+.cartButton {
+    background: #ffffff00;
+    border: none;
+    margin: 0 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #9c9c9c00;
+    transition: 1s;
+    font-size: 1vw;
+    text-transform: uppercase;
+    color: white;
+}
+
+.cartButton img {
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    margin: 0 5px;
+    filter: invert(1);
+}
+
+.cartButton:hover {
+    border-bottom: 2px solid #585858;
+    background-color: rgb(174, 174, 174);
+}
