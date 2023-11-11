@@ -1,12 +1,19 @@
 import classes from "./CartWidget.module.css"
 import cart from "./assets/shopping-cart-black.png"
+import { useCart } from '../../context/CartContext'
+import { useNavigate } from 'react-router-dom'
+
 
 const CartWidget = () => {
+    const { totalQuantity } = useCart()
+
+    const navigate = useNavigate()
+
     return (
-        <div className={`${classes.cartButton}`}>
+        <button onClick={() => navigate('/cart')} className={`${classes.cartButton}`}>
             <img src={cart} alt="" />
-            0
-        </div>
+            {totalQuantity}
+        </button>
     )
 }
 

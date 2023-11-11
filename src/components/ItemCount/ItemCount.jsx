@@ -1,7 +1,10 @@
 import classes from './ItemCount.module.css'
-import { useState } from "react";
+import { useCount } from "../../hooks/useCount"
 
-const ItemCount = ({stock, initial, onAdd}) => {
+const ItemCount = ({ onAdd }) => {
+    const { count, decrement, increment } = useCount(0)
+
+/* const ItemCount = ({stock, initial, onAdd}) => {
     const [quantity, setQuantity] = useState(initial)
 
     const decrement = () => {
@@ -14,19 +17,19 @@ const ItemCount = ({stock, initial, onAdd}) => {
         if (quantity < stock) {
             setQuantity(quantity + 1)
         } 
-    }
+    } */
 
     return(
         <div className={`${classes.counter}`}>
             <div className={`${classes.controls}`}>
                 <button className={`${classes.button}`} onClick={decrement}>-</button>
-                <h4 className={`${classes.number}`}>{quantity}</h4>
+                <h4 className={`${classes.number}`}>{count}</h4>
                 <button className={`${classes.button}`} onClick={increment}>+</button>
             </div>
             <div>
-                <button className={`${classes.buttonAddCart}`} onClick={() => onAdd(quantity)} disabled={!stock}>
+                {/* <button className={`${classes.buttonAddCart}`} onClick={() => onAdd(count)} disabled={!stock}>
                     Agregar al carrito
-                </button>
+                </button> */}
             </div>
         </div>
     )
