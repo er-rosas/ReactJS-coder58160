@@ -1,0 +1,18 @@
+.cartProductsContainer {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    overflow: auto;
+    align-items: center;
+    /* justify-content: center; */
+    cursor: pointer;
+}
+
+.card {
+    display: flex;
+}
+
+.card img {
+    height: 75px;
+    width: 75px;
+}

@@ -1,7 +1,14 @@
+import classes from './ItemDetail.module.css'
 // import ItemCount from '../ItemCount/ItemCount'
 import { useState } from "react"
 import { useCart } from "../../context/CartContext"
-import { useNotification } from "../../notification/NotificationContext"
+/* import { useNotification } from "../../notification/NotificationContext" */
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Link } from "react-router-dom";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const InputCount = ({ onAdd, stock, initial= 1 }) => {
     const [count, setCount] = useState(initial)
@@ -50,50 +57,72 @@ const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
     const ItemCount = inputType === 'button' ? ButtonCount : InputCount
 
     const { addItem, isInCart } = useCart()
-    const { setNotification } = useNotification()
+    /* const { setNotification } = useNotification() */
+    /* const { setNotif } = () => toast("Wow so easy!"); */
+    
 
-    const handleOnAdd = (quantity) => {       
+    const handleOnAdd = (quantity) => {
         const productToAdd = {
-            id, name, price, quantity
+            id, name, price, quantity, img
         }
 
         addItem(productToAdd)
-        setNotification('success', `Se agregaron ${quantity} ${name}`)
+        /* setNotification('success', `Se agregaron ${quantity} ${name}`) */
+        toast.success(`Se agregaron ${quantity} ${name}`, { position: toast.POSITION.TOP_RIGHT, style: {
+            fontSize: "16px"
+            }
+        });
     }
 
+    const navigate = useNavigate()
+
     return (
-        <article>
-            <button onClick={() => setInputType(inputType === 'input' ? 'button' : 'input')}>
+        <article className={`${classes.prodDetail}`}>
+            <div>
+                <Link to='/'>Atras</Link>
+            </div>
+            {/* <button onClick={() => setInputType(inputType === 'input' ? 'button' : 'input')}>
                 Cambiar contador
-            </button>
-            <header>
+            </button> */}
+            <picture className={`${classes.image}`}>
+                <img src={img} alt={name} />
+            </picture>
+            <section className={`${classes.detail}`}>
                 <h2>
                     {name}
                 </h2>
-            </header>
-            <picture>
-                <img src={img} alt={name} style={{ width: 100}}/>
-            </picture>
-            <section>
-                <p>
+                <p className={`${classes.desc1}`}>
                     Categoria: {category}
                 </p>
-                <p>
+                <p className={`${classes.desc2}`}>
                     Descripción: {description}
                 </p>
-                <p>
-                    Precio: {price}
+                <p className={`${classes.desc3}`}>
+                    Precio: ${price}
                 </p>
+                <div>
+                    {
+                        stock === 0 ? (
+                            <h2>No hay stock</h2>
+                        ) : (
+                            isInCart(id) ? (
+                                <button onClick={() => navigate('/cart')}>Finalizar Compra</button>
+                            ) : (
+                                <div>
+                                    <button onClick={() => setInputType(inputType === 'input' ? 'button' : 'input')}>
+                                        Cambiar contador
+                                    </button>
+                                        <ItemCount stock={stock} onAdd={handleOnAdd} />
+                                </div>
+                            )
+                        )
+                    }
+                </div>
             </section>           
-            <footer>
-                {
-                    isInCart(id) ? (
-                        <button>Finalizar Compra</button>
-                    ) : (
-                        <ItemCount stock={stock} onAdd={handleOnAdd}/>
-                    )
-                }
-            </footer>
+            <section>
+                
+            </section>
+            {/* <ToastContainer /> */}
         </article>
     )
 }

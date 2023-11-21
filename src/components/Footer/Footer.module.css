@@ -1,0 +1,125 @@
+.footer {
+    background-color: #f5f5f7;
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 60px 40px;
+}
+
+.footerLogo {
+    display: flex;
+}
+
+.footerLogo img {
+    height: 50px;
+    width: 50px;
+}
+
+.footerLogo a {
+    text-decoration: none;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    margin: 0 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #9c9c9c00;
+    transition: 1s;
+}
+
+.footerLogo a:hover {
+    cursor: pointer;
+    border-bottom: 2px solid #2f2f2f;
+    background-color: rgb(207, 207, 207);
+}
+
+.socialNet p {
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+    margin: 15px 0;
+}
+
+.socialNet ul {
+    display: flex;
+    list-style: none;
+}
+
+.socialNet ul li {
+    margin: 5px;
+}
+
+.socialNet ul li img {
+    height: 25px;
+    width: 25px;
+}
+
+.navigationLinks ul {
+    list-style: none;
+}
+
+.navigationLinks ul li {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000;
+    white-space: nowrap;
+    /* cursor: pointer; */
+    padding: 16px 0;
+    border-bottom: 1px solid silver;
+}
+
+.additionalLinks ul {
+    list-style: none;
+}
+
+.additionalLinks ul li {
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 8px;
+    color: #878787;
+}
+
+.contacto p {
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.contacto div {
+    margin: 15px 0;
+    font-size: 15px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.paymentMethods {
+    border-top: 1px solid silver;
+    display: flex;
+    justify-content: center;
+}
+
+.paymentMethods p {
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+    margin: 15px 0;
+}
+
+.copyrightText {
+    border-top: 1px solid silver;
+    display: flex;
+    justify-content: center;
+}
+
+.copyrightText p {
+    font-weight: 500;
+    font-size: 15px;
+    color: black;
+    margin: 15px 0;
+}

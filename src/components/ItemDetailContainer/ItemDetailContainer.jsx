@@ -1,3 +1,4 @@
+import classes from './ItemDetailContainer.module.css'
 import { useState, useEffect } from "react";
 /* import { getProductById } from "../../asyncMock"; */
 import ItemDetail from "../ItemDetail/ItemDetail";
@@ -40,7 +41,9 @@ const ItemDetailContainer = () => {
     }, [itemId])
 
     if(loading) {
-        return <h1>Cargando Producto</h1>
+        return <div className={`${classes.itemDetailContainer}`}>
+            <div className={classes.loader}></div>
+        </div>
     }
 
     if(!product) {
@@ -48,7 +51,7 @@ const ItemDetailContainer = () => {
     }
 
     return(
-        <div>
+        <div className={`${classes.itemDetailContainer}`}>
             <ItemDetail {...product} />
         </div>
     )

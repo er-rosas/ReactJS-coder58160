@@ -2,25 +2,34 @@ import { useState } from "react"
 import { useCart } from "../../context/CartContext"
 import { getDocs, collection, query, where, documentId, writeBatch, addDoc } from 'firebase/firestore'
 import { db } from "../../services/firebase/firebaseConfig"
+/* import FormWithValidationHOC from "../FormWithValidationHOC/FormWithValidation" */
+import ContactForm from "../ContactForm/ContactForm"
+import SummaryCart from "../SummaryCart/SummaryCart"
+import { Link } from "react-router-dom"
+import { createAdaptedOrder } from "../../adapters/createAdaptedOrder"
+
 
 const Checkout = () => {
     const [orderId, setOrderId] = useState('')
     const [loading, setLoading] = useState(false)
-    const { cart, total, clearCart } = useCart()
+    const { cart, totalQuantity, total, clearCart } = useCart()
+
+    const [outOfStockProducts, setOutOfStockProducts] = useState([])
 
     const createOrder = async (userData) => {
         try {
             setLoading(true)
 
-            const objOrder = {
+            /* const objOrder = {
                 buyer: {
-                    name: 'Sebastian Zuviria',
-                    email: 'contact@sebaz.io',
-                    phone: '123456678'
+                    firstName: userData.firstName,
+                    lastName: userData.lastName,
+                    email: userData.email
                 },
                 items: cart,
                 total
-            }
+            } */
+            const formattedOrder = createAdaptedOrder(userData, cart, total);
     
             const batch = writeBatch(db)
             const outOfStock = []
@@ -45,25 +54,30 @@ const Checkout = () => {
                     batch.update(documentSnapshot.ref, { stock: stockDb - prodQuantity})
                 } else {
                     outOfStock.push({ id: documentSnapshot.id, ...fields })
+                    setOutOfStockProducts(prevProducts => [...prevProducts, { id: documentSnapshot.id, name: fields.name, img: fields.img }])
                 }
     
                 if(outOfStock.length === 0) {
                     const ordersRef = collection(db, 'orders')
     
-                    const { id } = await addDoc(ordersRef, objOrder)
+                    /* const { id } = await addDoc(ordersRef, objOrder) */
+                    const { id } = await addDoc(ordersRef, formattedOrder);
                     batch.commit()
                     clearCart()
+                    setLoading(false)
                     setOrderId(id)
                     console.log(`El id de su orden es ${id}`)
                 } else {
                     console.log('No hay stock de algun producto')
+                    setLoading(false)
                 }
             })
+            
         } catch (error) {
             console.error('Hubo un error generando la orden')
-        } finally {
-            setLoading(false)
-        }
+        } /* finally {
+            
+        } */
     }
 
     if(loading) {
@@ -74,13 +88,40 @@ const Checkout = () => {
         return <h1>El id de su orden es: {orderId}</h1>
     }
 
+
+
     return (
         <>
-            <h1>Checkout</h1>
-            <h2>Realizar formulario para obtener los datos del usuario, este va a ser un componente orientado a evento</h2>
-
-            <button onClick={createOrder}>Crear orden</button> 
-            {/* Este boton estaria dentro del formulario ejecutando la funcion recibida por props */}
+            {outOfStockProducts.length > 0 ? (
+            <div>
+                <h2>Productos sin stock:</h2>
+                <ul>
+                    {outOfStockProducts.map(product => (
+                        <li key={product.id}>
+                            <img src={product.img} alt={product.name} />
+                            {product.name} - Sin stock
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ) : (
+            <>
+                <Link to='/cart'>Atras</Link>
+                <h1>Checkout</h1>
+                {cart.length === 0 ? (
+                    <p>Tu carrito está vacío</p>
+                ) : (
+                    <div>
+                        {cart.map(prod => (
+                            <SummaryCart key={prod.id} {...prod} />
+                        ))}
+                        <h3>Precio total de productos comprados {total}</h3>
+                    </div>
+                )}
+                <h2>Realizar formulario para obtener los datos del usuario, este va a ser un componente orientado a evento</h2>
+                <ContactForm onCreate={createOrder} />
+            </>
+        )}
         </>
     )
 }

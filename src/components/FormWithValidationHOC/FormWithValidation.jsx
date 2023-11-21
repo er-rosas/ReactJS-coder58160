@@ -71,7 +71,7 @@ const FormWithValidationHOC = () => {
     return (
         <div>
             <FormWithValidation formData={formData} onChange={handleChange} />
-            <Form formData={formData} onChange={handleChange} />
+            {/* <Form formData={formData} onChange={handleChange} /> */}
         </div>
     )
 }
