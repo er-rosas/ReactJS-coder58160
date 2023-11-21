@@ -1,6 +1,5 @@
 import classes from './Navbar.module.css'
 import CartWidget from "../CartWidget/CartWidget";
-import { Link } from 'react-router-dom'
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { getDocs, collection, query, orderBy } from 'firebase/firestore'
