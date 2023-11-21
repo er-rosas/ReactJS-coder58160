@@ -25,16 +25,8 @@ const Navbar = () => {
         
         getDocs(categoriesRef)
             .then(querySnapshot => {
-                /* const categoriesAdapted = querySnapshot.docs.map(doc => {
-                    const fields = doc.data()
-                    return { id: doc.id, ...fields}
-                }) */
-                /* const adaptedCategories = querySnapshot.docs.map(doc => adaptCategoryData(doc)); // Use the adaptation function here
-                return createAdaptedCategory(doc); */
                 const adaptedCategories = querySnapshot.docs.map(doc => createAdaptedCategory(doc));
                 setCategories(adaptedCategories);
-
-                /* setCategories(categoriesAdapted) */
             })
     }, [])
 
