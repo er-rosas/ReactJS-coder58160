@@ -25,10 +25,10 @@ const Cart = () => {
         <div className={`${classes.cartContainer}`}>
             <h1>Carrito de compras</h1>
                 {cart.length === 0 ? (
-                <p>Tu carrito está vacío</p>
+                <p className={`${classes.totalPrecio}`}>Tu carrito está vacío</p>
                 ) : (
                     <>
-                        <div>
+                        <div className={`${classes.cartProductsContainer}`}>
                         {cart.map(prod => /* {
                             return (
                                 <div key={prod.id}>
@@ -43,10 +43,10 @@ const Cart = () => {
                             )
                         } */ <ItemCart key={prod.id} {...prod} />)}
                         </div>
-                            <h3>Cantidad de productos comprados {totalQuantity}</h3>
-                            <h3>Precio todal de productos comprados {total}</h3>
-                            <button onClick={handleClearCart}>limpiar carrito</button>
-                        <Link to='/checkout'>Ir al Checkout</Link>
+                        <h3 className={`${classes.totalProductos}`}>Total productos: {totalQuantity}</h3>
+                        <h3 className={`${classes.totalPrecio}`}>Total: US$ {total}</h3>
+                        <button className={`${classes.limpiarCarrito}`} onClick={handleClearCart}>limpiar carrito</button>
+                        <Link className={`${classes.irCheckout}`} to='/checkout'>Ir al Checkout</Link>
                     </>
                 )}
         </div>

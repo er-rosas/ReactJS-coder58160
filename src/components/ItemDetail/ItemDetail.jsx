@@ -1,5 +1,5 @@
 import classes from './ItemDetail.module.css'
-// import ItemCount from '../ItemCount/ItemCount'
+import ItemCount from '../ItemCount/ItemCount'
 import { useState } from "react"
 import { useCart } from "../../context/CartContext"
 /* import { useNotification } from "../../notification/NotificationContext" */
@@ -21,8 +21,8 @@ const InputCount = ({ onAdd, stock, initial= 1 }) => {
 
     return (
         <div>
-            <input type='number' onChange={handleChange} value={count}/>
-            <button onClick={() => onAdd(count)}>Agregar al carrito</button>
+            <input className={`${classes.inputAddCart}`} type='number' onChange={handleChange} value={count}/>
+            <button className={`${classes.buttonAddCart}`} onClick={() => onAdd(count)}>Agregar al carrito</button>
         </div>
     )
 }
@@ -38,15 +38,19 @@ const ButtonCount = ({ onAdd, stock, initial = 1 }) => {
     }
 
     const decrement = () => {
-            setCount(count - 1)
+        if (count > 0) {
+            setCount(count - 1);
+        }
     }
 
     return (
-        <div>
-            <p>{count}</p>
-            <button onClick={decrement}>-</button>
-            <button onClick={increment}>+</button>
-            <button onClick={() => onAdd(count)}>Agregar al carrito</button>
+        <div className={`${classes.counter}`}>
+            <div className={`${classes.controls}`}>
+                <button className={`${classes.button}`} onClick={decrement}>-</button>
+                <p className={`${classes.number}`}>{count}</p>
+                <button className={`${classes.button}`} onClick={increment}>+</button>
+            </div>
+            <button className={`${classes.buttonAddCart}`} onClick={() => onAdd(count)}>Agregar al carrito</button>
         </div>
     )
 }
@@ -77,53 +81,49 @@ const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
     const navigate = useNavigate()
 
     return (
-        <article className={`${classes.prodDetail}`}>
-            <div>
+        <>
+            <div className={`${classes.linkAtras}`}>
                 <Link to='/'>Atras</Link>
             </div>
-            {/* <button onClick={() => setInputType(inputType === 'input' ? 'button' : 'input')}>
-                Cambiar contador
-            </button> */}
-            <picture className={`${classes.image}`}>
-                <img src={img} alt={name} />
-            </picture>
-            <section className={`${classes.detail}`}>
-                <h2>
-                    {name}
-                </h2>
-                <p className={`${classes.desc1}`}>
-                    Categoria: {category}
-                </p>
-                <p className={`${classes.desc2}`}>
-                    Descripción: {description}
-                </p>
-                <p className={`${classes.desc3}`}>
-                    Precio: ${price}
-                </p>
-                <div>
-                    {
-                        stock === 0 ? (
+            <article className={`${classes.prodDetail}`}>
+                <picture className={`${classes.image}`}>
+                    <img src={img} alt={name} />
+                </picture>
+                <section className={`${classes.detail}`}>
+                    <h2>
+                        {name}
+                    </h2>
+                    <p className={`${classes.desc1}`}>
+                        Categoria: {category}
+                    </p>
+                    <p className={`${classes.desc2}`}>
+                        Descripción: {description}
+                    </p>
+                    <p className={`${classes.desc3}`}>
+                        Precio: ${price}
+                    </p>
+                    <div>
+                        {stock === 0 ? (
                             <h2>No hay stock</h2>
                         ) : (
                             isInCart(id) ? (
-                                <button onClick={() => navigate('/cart')}>Finalizar Compra</button>
+                                <button className={`${classes.buttonAddCart}`} onClick={() => navigate('/cart')}>Finalizar Compra</button>
                             ) : (
                                 <div>
-                                    <button onClick={() => setInputType(inputType === 'input' ? 'button' : 'input')}>
+                                    <button className={`${classes.buttonAddCart}`} onClick={() => setInputType(inputType === 'input' ? 'button' : 'input')}>
                                         Cambiar contador
                                     </button>
-                                        <ItemCount stock={stock} onAdd={handleOnAdd} />
+                                    <ItemCount stock={stock} onAdd={handleOnAdd} />
                                 </div>
                             )
-                        )
-                    }
-                </div>
-            </section>           
-            <section>
-                
-            </section>
-            {/* <ToastContainer /> */}
-        </article>
+                        )}
+                    </div>
+                </section>
+                <section>
+
+                </section>
+                {/* <ToastContainer /> */}
+            </article></>
     )
 }
 

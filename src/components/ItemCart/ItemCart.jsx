@@ -18,17 +18,17 @@ const ItemCart = ({ id, name, quantity, price, img }) => {
     }
 
     return (
-        <div className={`${classes.cartProductsContainer}`} onClick={() => navigate(`/item/${id}`)}>
-            <div className={`${classes.card}`}>
+        <div className={`${classes.cartProductsContainer2}`} onClick={() => navigate(`/item/${id}`)}>
+            <div className={`${classes.cartProducts}`}>
+                <img src={img} alt="" />
                 <h2>
                     {name}
                 </h2>
-                <img src={img} alt="" />
                 <p>
                     Quantity: {quantity}
                 </p>
                 <p>
-                    ${price}
+                    c/u ${price}
                 </p>
                 <p>
                     Subtotal: ${price * quantity}

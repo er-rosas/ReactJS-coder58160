@@ -1,3 +1,4 @@
+import classes from './Checkout.module.css'
 import { useState } from "react"
 import { useCart } from "../../context/CartContext"
 import { getDocs, collection, query, where, documentId, writeBatch, addDoc } from 'firebase/firestore'
@@ -81,7 +82,9 @@ const Checkout = () => {
     }
 
     if(loading) {
-        return <h1>Se esta generando su orden...</h1>
+        return <div className={`${classes.itemDetailContainer}`}>
+        <div className={classes.loader}></div>
+    </div>
     }
 
     if(orderId) {
@@ -106,12 +109,14 @@ const Checkout = () => {
             </div>
         ) : (
             <>
+            <div className={`${classes.linkAtras}`}>
                 <Link to='/cart'>Atras</Link>
+            </div>
                 <h1>Checkout</h1>
                 {cart.length === 0 ? (
                     <p>Tu carrito está vacío</p>
                 ) : (
-                    <div>
+                    <div className={`${classes.cartProductsContainer}`}>
                         {cart.map(prod => (
                             <SummaryCart key={prod.id} {...prod} />
                         ))}
