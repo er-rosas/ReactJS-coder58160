@@ -1,4 +1,4 @@
-# 💄 Essence E-Commerce
+# 📱 Essence E-Commerce
 
 ![App Screenshot](https://.jpg)
 

@@ -9,16 +9,6 @@ const Item = ({ id, name, img, price }) => {
             <h3>${price}</h3>
             <Link to={`/item/${id}`}>Ver detalle</Link>
         </div>
-        /*  <Link className={ stock > 0 ? 'card' : 'card card--nostock' } to={`/producto/${ id }`}>
-            <img className="card__image" src={ imagen } alt={ nombre } />
-            <p className="card__price">${ precio }</p>
-            <h2 className="card__title">{ nombre }</h2>
-            { 
-                envio === true 
-                ?  <ShippingWidget/> 
-                : null
-            }
-        </Link> */
     )
 }
 

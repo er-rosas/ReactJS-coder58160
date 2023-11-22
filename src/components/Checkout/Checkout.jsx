@@ -21,15 +21,6 @@ const Checkout = () => {
         try {
             setLoading(true)
 
-            /* const objOrder = {
-                buyer: {
-                    firstName: userData.firstName,
-                    lastName: userData.lastName,
-                    email: userData.email
-                },
-                items: cart,
-                total
-            } */
             const formattedOrder = createAdaptedOrder(userData, cart, total);
     
             const batch = writeBatch(db)
@@ -38,9 +29,6 @@ const Checkout = () => {
             const ids = cart.map(prod => prod.id)
     
             const productsRef = query(collection(db, 'products'), where(documentId(),'in',ids))
-    
-            // getDocs(productsRef).then(QuerySnapshot => {})
-            // const QuerySnapshot = await getDocs(productsRef)
     
             const { docs } = await getDocs(productsRef)
     

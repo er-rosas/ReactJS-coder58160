@@ -11,11 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Cart = () => {
     const { cart, clearCart, removeItem, totalQuantity, total} = useCart()
 
-    /* const handleRemoveItem = (id) => {
-        removeItem(id);
-        
-    }; */
-
     const handleClearCart = () => {
         clearCart();
         toast.warning('Carrito limpiado');
@@ -29,19 +24,7 @@ const Cart = () => {
                 ) : (
                     <>
                         <div className={`${classes.cartProductsContainer}`}>
-                        {cart.map(prod => /* {
-                            return (
-                                <div key={prod.id}>
-                                    <h3>{prod.name}</h3>
-                                    <img src={prod.img} />
-                                    <p>Precio Unitario ${prod.price}</p>
-                                    <h4>Cantidad: {prod.quantity}</h4>
-                                    <button onClick={handleRemoveItem}>
-                                        Remover
-                                    </button>
-                                </div>
-                            )
-                        } */ <ItemCart key={prod.id} {...prod} />)}
+                        {cart.map(prod => <ItemCart key={prod.id} {...prod} />)}
                         </div>
                         <h3 className={`${classes.totalProductos}`}>Total productos: {totalQuantity}</h3>
                         <h3 className={`${classes.totalPrecio}`}>Total: US$ {total}</h3>

@@ -2,7 +2,6 @@ import classes from './ItemDetail.module.css'
 import ItemCount from '../ItemCount/ItemCount'
 import { useState } from "react"
 import { useCart } from "../../context/CartContext"
-/* import { useNotification } from "../../notification/NotificationContext" */
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,9 +60,6 @@ const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
     const ItemCount = inputType === 'button' ? ButtonCount : InputCount
 
     const { addItem, isInCart } = useCart()
-    /* const { setNotification } = useNotification() */
-    /* const { setNotif } = () => toast("Wow so easy!"); */
-    
 
     const handleOnAdd = (quantity) => {
         const productToAdd = {
@@ -71,7 +67,6 @@ const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
         }
 
         addItem(productToAdd)
-        /* setNotification('success', `Se agregaron ${quantity} ${name}`) */
         toast.success(`Se agregaron ${quantity} ${name}`, { position: toast.POSITION.TOP_RIGHT, style: {
             fontSize: "16px"
             }
@@ -122,42 +117,8 @@ const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
                 <section>
 
                 </section>
-                {/* <ToastContainer /> */}
             </article></>
     )
 }
 
 export default ItemDetail
-
-
-/* import classes from './ItemDetail.module.css'
-import ItemCount from "../ItemCount/ItemCount";
-
-const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
-    return (
-        <article className={`${classes.prodDetail}`}>
-            <picture className={`${classes.image}`}>
-                <img src={img} alt={name} />
-            </picture>
-            <section className={`${classes.detail}`}>
-                <h2>
-                    {name}
-                </h2>
-                <p className={`${classes.desc1}`}>
-                    Categoria: {category}
-                </p>
-                <p className={`${classes.desc2}`}>
-                    Descripción: {description}
-                </p>
-                <p className={`${classes.desc3}`}>
-                    Precio: ${price}
-                </p>
-                <div>
-                    <ItemCount initial={1} stock={stock} onAdd={(quantity) => console.log('Cantidad agregada' ,quantity)}/>
-                </div>
-            </section>
-        </article>
-    )
-}
-
-export default ItemDetail */

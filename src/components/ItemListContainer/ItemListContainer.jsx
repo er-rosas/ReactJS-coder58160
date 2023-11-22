@@ -1,11 +1,7 @@
 import classes from './ItemListContainer.module.css'
-/* import { useState, useEffect } from 'react' */
-
 import { memo } from 'react'
 import { useAsync } from '../../hooks/useAsync.js'
-/* import { getProducts, getProductsByCategory } from '../../asyncMock.js' */
 import ItemList from '../ItemList/ItemList.jsx'
-/* import Loader from '../Loader/Loader.jsx' */
 import { useParams } from 'react-router-dom'
 import { getProducts } from '../../services/firebase/firestore/products'
 
@@ -15,7 +11,7 @@ const MemoizedItemList = memo(ItemList) // En este cazo no seria tan necesario, 
 const ItemListContainer = ({ greeting }) => {
     const { categoryId } = useParams()
 
-    const asyncFunction = () => getProducts(categoryId)//categoryId ? getProductsByCategory(categoryId) : getProducts()
+    const asyncFunction = () => getProducts(categoryId)
 
     const { data: products, loading, error } = useAsync(asyncFunction, [categoryId])
 
@@ -32,23 +28,6 @@ const ItemListContainer = ({ greeting }) => {
     if(products.length === 0) {
         return <h1>No existen productos para esta categoria</h1>
     }
-
-
-    /* const [products, setProducts] = useState([])
-
-    const { categoryId } = useParams()
-
-    useEffect(() => {
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
-
-        asyncFunction(categoryId)
-            .then(response => {
-                setProducts(response)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }, [categoryId]) */
 
     return (
         <div className={`${classes.itemListContainer}`}>

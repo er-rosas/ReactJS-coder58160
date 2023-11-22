@@ -37,9 +37,7 @@ const ItemCart = ({ id, name, quantity, price, img }) => {
                     Remove
                 </button>
             </div>
-                {/* <button onClick={handleRemoveItem}>
-                        Remove
-                </button> */}
+                
         </div>
     );
 }
